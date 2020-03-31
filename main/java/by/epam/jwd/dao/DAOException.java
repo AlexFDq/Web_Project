@@ -1,9 +1,7 @@
-package by.epam.jwd.final_project_DUBROVINSKY.dao.exception;
+package by.epam.jwd.dao;
 
-import java.io.Serializable;
-
-public class DAOException extends Exception implements Serializable {
-    private final static long serialVersionUID = 2L;
+public class DAOException extends Exception {
+    private final static long serialVersionUID = 1L;
 
     public DAOException() {
         super();
