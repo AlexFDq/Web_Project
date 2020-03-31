@@ -1,7 +1,7 @@
 package by.epam.jwd.connection_pool;
 
 public class ConnectionPoolException extends Exception {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8L;
 
     public ConnectionPoolException() {
         super();

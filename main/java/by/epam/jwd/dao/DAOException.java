@@ -1,7 +1,7 @@
 package by.epam.jwd.dao;
 
 public class DAOException extends Exception {
-    private final static long serialVersionUID = 1L;
+    private final static long serialVersionUID = 9L;
 
     public DAOException() {
         super();

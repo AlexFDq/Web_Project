@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Variant implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4L;
 
     private int number;
     private String name;
