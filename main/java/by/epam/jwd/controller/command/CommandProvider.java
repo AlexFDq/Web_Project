@@ -1,20 +1,22 @@
 package by.epam.jwd.controller.command;
 
-import by.epam.jwd.controller.command.studentImpl.JoinGroup;
-import by.epam.jwd.controller.command.studentImpl.PassTest;
-import by.epam.jwd.controller.command.teacherImpl.AddTest;
-import by.epam.jwd.controller.command.teacherImpl.ChangeTest;
-import by.epam.jwd.controller.command.teacherImpl.DeleteTest;
-import by.epam.jwd.controller.command.teacherImpl.FormGroup;
-import by.epam.jwd.controller.command.userImpl.SignIn;
-import by.epam.jwd.controller.command.userImpl.SignOut;
-import by.epam.jwd.controller.command.userImpl.SignUp;
+import by.epam.jwd.controller.command.student_impl.JoinGroup;
+import by.epam.jwd.controller.command.student_impl.PassTest;
+import by.epam.jwd.controller.command.teacher_impl.AddTest;
+import by.epam.jwd.controller.command.teacher_impl.ChangeTest;
+import by.epam.jwd.controller.command.teacher_impl.DeleteTest;
+import by.epam.jwd.controller.command.teacher_impl.FormGroup;
+import by.epam.jwd.controller.command.user_impl.SignIn;
+import by.epam.jwd.controller.command.user_impl.SignOut;
+import by.epam.jwd.controller.command.user_impl.SignUp;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandProvider {
     private final Map<CommandName, Command> repository = new HashMap<>();
+    private final String COMMAND_PARAM = "command";
 
     public CommandProvider() {
         repository.put(CommandName.SIGN_IN, new SignIn());
@@ -28,7 +30,14 @@ public class CommandProvider {
         repository.put(CommandName.FORM_GROUP, new FormGroup());
     }
 
-    public Command getCommand(CommandName commandName) {
-        return repository.get(commandName);
+    public Command getCommand(HttpServletRequest request) {
+        String commandParameter = request.getParameter(COMMAND_PARAM);
+        Command command = repository.get(commandParameter);
+
+        if (command == null) {
+            command = new WrongCommand();
+        }
+
+        return command;
     }
 }

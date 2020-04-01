@@ -21,17 +21,20 @@ public class ConnectionPool {
     private int poolSize;
 
     private final int DEFAULT_POOL_SIZE = 5;
+    private final String CONNECTION_POOL_EXCEPTION = "SQLException in connection pool";
+    private final String DRIVER_CLASS_EXCEPTION = "Database driver class wasn't found";
+    private final String DATA_SOURCE_CONNECTION_EXCEPTION = "Error connecting to the data source";
 
-    private ConnectionPool() {
-        DBResourceManager dbResourceManager = DBResourceManager.getInstance();
+    public ConnectionPool() {
+        DataBaseResourceManager dataBaseResourceManager = DataBaseResourceManager.getInstance();
 
-        this.driverName = dbResourceManager.getValue(DBParameter.DB_DRIVER);
-        this.url = dbResourceManager.getValue(DBParameter.DB_URL);
-        this.user = dbResourceManager.getValue(DBParameter.DB_USER);
-        this.password = dbResourceManager.getValue(DBParameter.DB_PASSWORD);
+        this.driverName = dataBaseResourceManager.getValue(DataBaseParameter.DATABASE_DRIVER);
+        this.url = dataBaseResourceManager.getValue(DataBaseParameter.DATABASE_URL);
+        this.user = dataBaseResourceManager.getValue(DataBaseParameter.DATABASE_USER);
+        this.password = dataBaseResourceManager.getValue(DataBaseParameter.DATABASE_PASSWORD);
 
         try {
-            this.poolSize = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_POOL_SIZE));
+            this.poolSize = Integer.parseInt(dataBaseResourceManager.getValue(DataBaseParameter.DATABASE_POOL_SIZE));
         } catch (NumberFormatException exception) {
             this.poolSize = DEFAULT_POOL_SIZE;
         }
@@ -49,9 +52,9 @@ public class ConnectionPool {
                 connectionQueue.add(pooledConnection);
             }
         } catch (SQLException ex) {
-            throw new ConnectionPoolException("SQLException in connection pool", ex);
+            throw new ConnectionPoolException(CONNECTION_POOL_EXCEPTION, ex);
         } catch (ClassNotFoundException ex) {
-            throw new ConnectionPoolException("Database driver class wasn't found", ex);
+            throw new ConnectionPoolException(DRIVER_CLASS_EXCEPTION, ex);
         }
     }
 
@@ -86,7 +89,7 @@ public class ConnectionPool {
             connection = connectionQueue.take();
             givenAwayConnectionQueue.add(connection);
         } catch (InterruptedException ex) {
-            throw new ConnectionPoolException("Error connecting to the data source", ex);
+            throw new ConnectionPoolException(DATA_SOURCE_CONNECTION_EXCEPTION, ex);
         }
         return connection;
     }
@@ -112,6 +115,10 @@ public class ConnectionPool {
     }
 
     private class PooledConnection implements Connection {
+        private final String DELETING_CONNECTION_EXCEPTION = "Error deleting connection from the given away connection pool";
+        private final String CLOSING_CLOSED_CONNECTION_EXCEPTION = "Attempting to close closed connection";
+        private final String ALLOCATING_CONNECTION_EXCEPTION = "Error allocating connection to the pool";
+
         private Connection connection;
 
         public PooledConnection(Connection connection) throws SQLException{
@@ -162,7 +169,7 @@ public class ConnectionPool {
         @Override
         public void close() throws SQLException {
             if (connection.isClosed()) {
-                throw new SQLException("Attempting to close closed connection.");
+                throw new SQLException(CLOSING_CLOSED_CONNECTION_EXCEPTION);
             }
 
             if (connection.isReadOnly()) {
@@ -170,10 +177,10 @@ public class ConnectionPool {
             }
 
             if (!givenAwayConnectionQueue.remove(this)) {
-                throw new SQLException("Error deleting connection from the given away connection pool.");
+                throw new SQLException(DELETING_CONNECTION_EXCEPTION);
             }
             if (!connectionQueue.offer(this)) {
-                throw new SQLException("Error allocating connectiob to the pool");
+                throw new SQLException(ALLOCATING_CONNECTION_EXCEPTION);
             }
         }
 

@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Variant implements Serializable {
     private static final long serialVersionUID = 4L;
 
-    private int number;
+    private int id;
     private String name;
     private boolean isCorrect;
     private int questionNumber;
@@ -15,19 +15,19 @@ public class Variant implements Serializable {
 
     }
 
-    public Variant(int number, String name, boolean isCorrect, int questionNumber) {
-        this.number = number;
+    public Variant(int id, String name, boolean isCorrect, int questionNumber) {
+        this.id = id;
         this.name = name;
         this.isCorrect = isCorrect;
         this.questionNumber = questionNumber;
     }
 
-    public int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int number) {
+        this.id = number;
     }
 
     public String getName() {
@@ -59,7 +59,7 @@ public class Variant implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Variant variant = (Variant) o;
-        return number == variant.number &&
+        return id == variant.id &&
                 isCorrect == variant.isCorrect &&
                 questionNumber == variant.questionNumber &&
                 Objects.equals(name, variant.name);
@@ -67,13 +67,13 @@ public class Variant implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, name, isCorrect, questionNumber);
+        return Objects.hash(id, name, isCorrect, questionNumber);
     }
 
     @Override
     public String toString() {
         return "Variant{" +
-                "number=" + number +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", isCorrect=" + isCorrect +
                 ", questionNumber=" + questionNumber +

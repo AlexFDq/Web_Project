@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Question implements Serializable {
     private static final long serialVersionUID = 5L;
 
-    private int number;
+    private int id;
     private String name;
     private int testId;
     private List<Variant> variants;
@@ -16,19 +16,19 @@ public class Question implements Serializable {
 
     }
 
-    public Question(int number, String name, int testId, List<Variant> variants) {
-        this.number = number;
+    public Question(int id, String name, int testId, List<Variant> variants) {
+        this.id = id;
         this.name = name;
         this.testId = testId;
         this.variants = variants;
     }
 
-    public int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,7 +60,7 @@ public class Question implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return number == question.number &&
+        return id == question.id &&
                 testId == question.testId &&
                 Objects.equals(name, question.name) &&
                 Objects.equals(variants, question.variants);
@@ -68,13 +68,13 @@ public class Question implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, name, testId, variants);
+        return Objects.hash(id, name, testId, variants);
     }
 
     @Override
     public String toString() {
         return "Question{" +
-                "number=" + number +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", testId=" + testId +
                 ", variants=" + variants +

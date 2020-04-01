@@ -6,7 +6,7 @@ import by.epam.jwd.dao.UserDAO;
 
 public class UserDAOImpl implements UserDAO {
     @Override
-    public void signIn(String login, String password, String email) throws DAOException {
+    public void signIn(int userId, String login, String password, String email) throws DAOException {
 
     }
 
