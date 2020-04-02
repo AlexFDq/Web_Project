@@ -9,6 +9,7 @@ import by.epam.jwd.controller.command.teacher_impl.FormGroup;
 import by.epam.jwd.controller.command.user_impl.SignIn;
 import by.epam.jwd.controller.command.user_impl.SignOut;
 import by.epam.jwd.controller.command.user_impl.SignUp;
+import by.epam.jwd.controller.command.user_impl.WrongCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

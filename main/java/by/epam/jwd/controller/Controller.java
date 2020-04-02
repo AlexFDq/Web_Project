@@ -21,7 +21,7 @@ public class Controller extends HttpServlet {
     private final String SERVLET_EXCEPTION_MESSAGE = "servlet_exception_message";
     private final String IO_EXCEPTION_MESSAGE = "input_output_exception_message";
     private final String ERROR_PAGE_PATH = "error_page_path";
-    private final String OTHER_EXCEPTION = "other_exception";
+    private final String INDEX_PAGE = "index_page";
 
     public Controller() {
         super();
@@ -56,7 +56,7 @@ public class Controller extends HttpServlet {
                 request.setAttribute(ERROR_ATTRIBUTE, resourceBundle.getObject(IO_EXCEPTION_MESSAGE));
             }
         } else {
-            page = resourceBundle.getString(OTHER_EXCEPTION);
+            page = resourceBundle.getString(INDEX_PAGE);
             response.sendRedirect(request.getContextPath() + page);
         }
 

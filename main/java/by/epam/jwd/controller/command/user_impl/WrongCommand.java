@@ -1,4 +1,6 @@
-package by.epam.jwd.controller.command;
+package by.epam.jwd.controller.command.user_impl;
+
+import by.epam.jwd.controller.command.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
