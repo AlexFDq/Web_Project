@@ -91,6 +91,7 @@ public class ConnectionPool {
         } catch (InterruptedException ex) {
             throw new ConnectionPoolException(DATA_SOURCE_CONNECTION_EXCEPTION, ex);
         }
+
         return connection;
     }
 

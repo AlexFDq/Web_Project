@@ -4,7 +4,7 @@ import by.epam.jwd.service.impl.StudentServiceImpl;
 import by.epam.jwd.service.impl.TeacherServiceImpl;
 import by.epam.jwd.service.impl.UserServiceImpl;
 
-public class ServiceFactory {
+public final class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();
 
     private final UserService userService = new UserServiceImpl();

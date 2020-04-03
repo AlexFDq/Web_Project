@@ -4,6 +4,7 @@ import by.epam.jwd.bean.User;
 import by.epam.jwd.dao.DAOException;
 import by.epam.jwd.dao.DAOFactory;
 import by.epam.jwd.dao.UserDAO;
+import by.epam.jwd.dao.connection_pool.ConnectionPoolException;
 import by.epam.jwd.service.ServiceException;
 import by.epam.jwd.service.UserService;
 
@@ -12,22 +13,37 @@ public class UserServiceImpl implements UserService {
     private final String WRONG_LOGIN = "Login is incorrect";
     private final String WRONG_PASSWORD = "Password is incorrect";
     private final String WRONG_EMAIL = "Email is incorrect";
+    private final String WRONG_PROGRESS = "Progress is incorrect";
+    private final String WRONG_ROLE_ID = "Role id is incorrect";
+
     private final String WRONG_SIGN_IN_PROCEDURE = "Error during sign in procedure";
     private final String WRONG_SIGN_UP_PROCEDURE = "Error during sign up procedure";
     private final String WRONG_SIGN_OUT_PROCEDURE = "Error during sign out procedure";
 
     @Override
-    public void signIn(String login, String password) throws ServiceException {
+    public void signIn(int id, String login, String password, String email, float progress, int roleId) throws ServiceException {
+        if (id <= 0) {
+            throw new ServiceException(WRONG_USER_ID);
+        }
         if (login == null) {
             throw new ServiceException(WRONG_LOGIN);
         }
         if (password == null) {
             throw new ServiceException(WRONG_PASSWORD);
         }
+        if (email == null) {
+            throw new ServiceException(WRONG_EMAIL);
+        }
+        if (progress <= 0) {
+            throw new ServiceException(WRONG_PROGRESS);
+        }
+        if (roleId <= 0) {
+            throw new ServiceException(WRONG_ROLE_ID);
+        }
 
         try {
-            getUserDAO().signIn(login, password);
-        } catch (DAOException e) {
+            getUserDAO().signIn(id, login, password, email, progress, roleId);
+        } catch (DAOException | ConnectionPoolException e) {
             throw new ServiceException(WRONG_SIGN_IN_PROCEDURE, e);
         }
     }

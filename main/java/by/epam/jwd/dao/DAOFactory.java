@@ -4,7 +4,7 @@ import by.epam.jwd.dao.impl.StudentDAOImpl;
 import by.epam.jwd.dao.impl.TeacherDAOImpl;
 import by.epam.jwd.dao.impl.UserDAOImpl;
 
-public class DAOFactory {
+public final class DAOFactory {
     private static final DAOFactory instance = new DAOFactory();
 
     private final UserDAO userDAO = new UserDAOImpl();
