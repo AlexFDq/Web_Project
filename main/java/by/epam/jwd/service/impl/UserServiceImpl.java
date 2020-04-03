@@ -17,22 +17,16 @@ public class UserServiceImpl implements UserService {
     private final String WRONG_SIGN_OUT_PROCEDURE = "Error during sign out procedure";
 
     @Override
-    public void signIn(int userId, String login, String password, String email) throws ServiceException {
-        if (userId <= 0) {
-            throw new ServiceException(WRONG_USER_ID);
-        }
+    public void signIn(String login, String password) throws ServiceException {
         if (login == null) {
             throw new ServiceException(WRONG_LOGIN);
         }
         if (password == null) {
             throw new ServiceException(WRONG_PASSWORD);
         }
-        if (email == null) {
-            throw new ServiceException(WRONG_EMAIL);
-        }
 
         try {
-            getUserDAO().signIn(userId, login, password, email);
+            getUserDAO().signIn(login, password);
         } catch (DAOException e) {
             throw new ServiceException(WRONG_SIGN_IN_PROCEDURE, e);
         }
@@ -40,10 +34,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void singUp(User user) throws ServiceException {
+        int userId = user.getId();
         String login = user.getLogin();
         String password = user.getPassword();
         String email = user.getEmail();
 
+        if (userId <= 0) {
+            throw new ServiceException(WRONG_USER_ID);
+        }
         if (login == null || login.isEmpty()) {
             throw new ServiceException(WRONG_LOGIN);
         }

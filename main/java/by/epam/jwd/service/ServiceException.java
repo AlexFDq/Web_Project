@@ -1,7 +1,7 @@
 package by.epam.jwd.service;
 
 public class ServiceException extends Exception {
-    private static final long serialVersionUID = 10L;
+    private static final long serialVersionUID = -2688095351020255228L;
 
     public ServiceException() {
     }

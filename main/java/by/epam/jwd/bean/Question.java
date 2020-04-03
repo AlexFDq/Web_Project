@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Question implements Serializable {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 379348644252443585L;
 
     private int id;
     private String name;

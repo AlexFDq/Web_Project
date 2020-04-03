@@ -24,7 +24,6 @@ public class SignIn implements Command {
     private final String INDEX_PAGE = "index_page";
     private final String SERVLET_EXCEPTION_MESSAGE = "servlet_exception_message";
 
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("utf-8");

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Category implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -9044282091504685630L;
 
     private int id;
     private String name;

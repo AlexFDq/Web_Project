@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Group implements Serializable {
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 4674839227003234668L;
 
     private int id;
     private String name;

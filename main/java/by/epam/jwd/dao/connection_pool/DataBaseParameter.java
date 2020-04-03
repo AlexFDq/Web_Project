@@ -1,4 +1,4 @@
-package by.epam.jwd.connection_pool;
+package by.epam.jwd.dao.connection_pool;
 
 public final class DataBaseParameter {
     public static final String DATABASE_DRIVER = "database.driver";

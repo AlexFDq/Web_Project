@@ -13,17 +13,20 @@ public class StudentServiceImpl extends UserServiceImpl implements StudentServic
     private final String WRONG_JOIN_GROUP_PROCEDURE = "Error during group joining procedure";
 
     @Override
-    public void passTest(int testId) throws ServiceException {
+    public int passTest(int testId) throws ServiceException {
         if (testId <= 0) {
             throw new ServiceException(WRONG_TEST_ID);
         }
 
+        int result;
+
         try {
-            getStudentDAO().passTest(testId);
+            result = getStudentDAO().passTest(testId);
         } catch (DAOException e) {
             throw new ServiceException(WRONG_PASS_TEST_PROCEDURE);
         }
 
+        return result;
     }
 
     @Override

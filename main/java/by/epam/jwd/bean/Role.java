@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Role implements Serializable {
-    private static final long serialVersionUID = 6L;
+    private static final long serialVersionUID = 4623999501040372557L;
 
     private int id;
     private String name;

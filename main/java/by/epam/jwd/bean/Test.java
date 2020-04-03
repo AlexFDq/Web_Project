@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Test implements Serializable {
-    private static final long serialVersionUID = 7L;
+    private static final long serialVersionUID = -5770948900360013569L;
 
     private int id;
     private String name;

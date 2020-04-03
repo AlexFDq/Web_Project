@@ -5,8 +5,8 @@ import by.epam.jwd.dao.StudentDAO;
 
 public class StudentDAOImpl extends UserDAOImpl implements StudentDAO {
     @Override
-    public void passTest(int testId) throws DAOException {
-
+    public int passTest(int testId) throws DAOException {
+        return 0;
     }
 
     @Override
