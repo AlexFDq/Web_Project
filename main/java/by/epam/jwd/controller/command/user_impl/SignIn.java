@@ -46,7 +46,7 @@ public class SignIn implements Command {
         String page = resourceBundle.getString(INDEX_PAGE);
 
         try {
-            userService.signIn(userId, login, password, email);
+            userService.signIn(login, password);
         } catch (ServiceException e) {
             request.setAttribute(ERROR_PARAM, resourceBundle.getString(SERVLET_EXCEPTION_MESSAGE));
             page = resourceBundle.getString(ERROR_PATH);
